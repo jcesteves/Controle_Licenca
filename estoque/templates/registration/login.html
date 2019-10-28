@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
+
+    <title>Index</title>
+    {% bootstrap_css %}
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px">
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</nav>
+<div class="bg">
+<div class="container container-fluid">
+    <h2>Login</h2>
+    <br>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-info">Login</button>
+    </form>
+</div>
+</div>
+<footer class="footer page-footer">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright</div>
+    <!-- Copyright -->
+</footer>
+</div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

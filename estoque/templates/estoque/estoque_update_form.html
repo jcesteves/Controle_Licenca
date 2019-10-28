@@ -1,0 +1,43 @@
+{% extends 'estoque/index.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+{% bootstrap_messages %}
+
+<div class="container container-fluid">
+    <h2>Atualizar Licença</h2>
+    <div class="containe container-fluid">
+        <form method="post">{% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        {% bootstrap_field form.produto %}
+                        {% bootstrap_field form.fornecedor %}
+                        {% bootstrap_field form.contrato %}
+                    </div>
+
+                    <div class="col-sm">
+                        {% bootstrap_field form.aquisicoes %}
+                        {% bootstrap_field form.quantidade_disponivel %}
+                        {% bootstrap_field form.reservadas %}
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" value="Salvar" class="btn btn-success" onclick="utilizou_licenca({{object.id}})">
+            {% if object %}
+            <a href="{% url 'excluir_estoque' object.pk %}" class="btn btn-danger">Excluir</a>
+            {% endif %}
+            <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sair</a>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block static %}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/func_ajax.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="10">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
+
+    <title>Index</title>
+    {% bootstrap_css %}
+</head>
+<body>
+{% block header%}
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px" class="img">
+        <div>
+            <a href="{% url 'admin:index' %}" class="btn btn-secondary">Cadastrar Usuário</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+<div class="container container-fluid">
+    {% block content %}
+    <br>
+    <h2 align="center">Olá, seja bem vindo ao sistema de controle de licença</h2>
+    <br>
+    <div class="" align="center">
+        <h6><p>Clique no botão abaixo para entrar no sistema de controle de licença</p></h6>
+        <br>
+        <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sistema</a>
+    </div>
+    {% endblock %}
+
+    <footer class="footer page-footer">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            <div>
+                <span>© 2018 Copyright - Desenvolvido por Analytics - Porto Seguro</span>
+            </div>
+        </div>
+        <!-- Copyright -->
+    </footer>
+</div>
+{% block static %}
+{% endblock %}
+</body>
+</html>

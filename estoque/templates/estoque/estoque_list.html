@@ -1,0 +1,55 @@
+{% extends 'estoque/index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h2>Controle de Licença</h2>
+    <div>
+        <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;" >Cadastrar Licença</a><br>
+        <a href="{% url 'exportar_excel' %}" class="btn btn-second" style="float:right;">Extrair Relatório</a><br>
+    </div>
+</div>
+<br>
+<div class="card text-white bg-light">
+    {{csrf_token}}
+    <div class="card-body">
+        <div class="table">
+            <table class="table table-bordered table-responsive-md table-striped text-center"
+                   id="estoque_atual">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Fornecedor</th>
+                    <th scope="col">Contrato</th>
+                    <th scope="col">Aquisições</th>
+                    <th scope="col">Quantidade disponível</th>
+                    <th scope="col">Reservadas</th>
+                    <th scope="col">Estoque</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% csrf_token %}
+                {% for lista in object_list %}
+                <tr>
+                    <th scope="row">{{lista.pk}}</th>
+                    <td ><a href="{% url 'editar_estoque' lista.pk %}">{{lista.produto}}</a></td>
+                    <td>{{lista.fornecedor}}</td>
+                    <td>{{lista.contrato}}</td>
+                    <td>{{lista.aquisicoes}}</td>
+                    <td>{{lista.quantidade_disponivel}}</td>
+                    <td>{{lista.reservadas}}</td>
+                    <td>{{lista.total_estoque}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block static %}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/func_ajax.js' %}"></script>
+{% endblock %}
