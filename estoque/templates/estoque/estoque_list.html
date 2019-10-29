@@ -1,18 +1,18 @@
 {% extends 'estoque/index.html' %}
 {% load static %}
 {% block content %}
-
+<br>
 <div class="container">
-    <h2>Controle de Licença</h2>
-    <div>
+        <h2>Controle de Licença</h2>
+        <h5 id="user" style="float:left;">Usuário: {{request.user.first_name}}</h5>
+        <a href="{% url 'exportar_excel' %}" class="btn btn-warning" style="float:right; color: white;">Extrair Relatório</a>
         <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;" >Cadastrar Licença</a><br>
-        <a href="{% url 'exportar_excel' %}" class="btn btn-second" style="float:right;">Extrair Relatório</a><br>
-    </div>
 </div>
 <br>
-<div class="card text-white bg-light">
-    {{csrf_token}}
+<div class="card text-white bg-dark">
+
     <div class="card-body">
+
         <div class="table">
             <table class="table table-bordered table-responsive-md table-striped text-center"
                    id="estoque_atual">

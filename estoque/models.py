@@ -15,9 +15,11 @@ class Estoque(models.Model):
     def get_absolute_url(self):
         return reverse('listar_estoque')
 
+    @property
     def total_estoque(self):
-        total = self.quantidade_disponivel + self.reservadas
-        return total
+        self.estoque = self.quantidade_disponivel + self.reservadas
+        Estoque.save(self)
+        return self.estoque or 0
 
     def __str__(self):
         return str(self.produto) + str(self.fornecedor) + str(self.contrato) + \

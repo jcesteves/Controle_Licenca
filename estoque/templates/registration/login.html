@@ -11,25 +11,26 @@
     {% bootstrap_css %}
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark">
     <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px">
     <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
 </nav>
 <div class="bg">
-<div class="container container-fluid">
+<div class="container container-fluid"><br>
     <h2>Login</h2>
     <br>
+    <div class="login">
     <form method="post" autocomplete="off">
         {% csrf_token %}
         {% bootstrap_form form %}
         <button type="submit" class="btn btn-info">Login</button>
     </form>
+    </div>
 </div>
 </div>
 <footer class="footer page-footer">
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright</div>
+    <div class="footer-copyright text-center py-3">© 2018 Copyright - Desenvolvido por Analytics - Porto Seguro</div>
     <!-- Copyright -->
 </footer>
 </div>

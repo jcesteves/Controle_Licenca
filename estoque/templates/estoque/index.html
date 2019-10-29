@@ -5,15 +5,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="60">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
 
     <title>Index</title>
     {% bootstrap_css %}
 </head>
-<body>
-{% block header%}
+<body  style="background-image: url({% static 'bootstrap/images/background.png' %})">
 <header>
     <nav class="navbar navbar-dark bg-dark">
         <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px" class="img">
@@ -23,16 +22,16 @@
         </div>
     </nav>
 </header>
-{% endblock %}
+
 <div class="container container-fluid">
     {% block content %}
     <br>
-    <h2 align="center">Olá, seja bem vindo ao sistema de controle de licença</h2>
+    <h2 align="center">Olá {{request.user.first_name}}, seja bem vindo ao sistema de controle de licença</h2>
     <br>
     <div class="" align="center">
         <h6><p>Clique no botão abaixo para entrar no sistema de controle de licença</p></h6>
         <br>
-        <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sistema</a>
+            <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sistema</a>
     </div>
     {% endblock %}
 

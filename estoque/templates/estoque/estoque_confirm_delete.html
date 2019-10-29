@@ -8,8 +8,8 @@
 
     <div class="card-body">
         <form method="post">{% csrf_token %}
-            <h4> Você tem certeza de que deseja excluir a licença: <strong
-                    style="color:red;">{{object}}</strong>?</h4>
+            <h4>{{request.user.first_name}}, você tem certeza de que deseja excluir a licença abaixo?<br><br><p><strong
+                    style="color:red;">{{object}}</strong></p></h4>
             <br><input type="submit" value="Excluir" class="btn btn-danger">
             <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sair</a>
         </form>

@@ -1,7 +1,5 @@
 import json
-import io
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -17,21 +15,23 @@ def index(request):
     return render(request, 'estoque/index.html')
 
 
-class List_estoque(LoginRequiredMixin, ListView):
+class List_estoque(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Estoque
+    permission_required = ('estoque.view_estoque')
+
 
 
 class Edit_estoque(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Estoque
     fields = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas']
     template_name_suffix = '_update_form'
-    permission_required = 'estoque_Can_add_estoque'
+    permission_required = ('estoque.view_estoque', 'estoque.estoque.can_editar', 'estoque.can_listar')
 
 
 class Create_estoque(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Estoque
     fields = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas']
-    permission_required = ('estoque_Can__cadastrar')
+    permission_required = ('estoque.change_estoque', 'estoque.add_estoque','auth.view_permission')
 
     def get_success_url(self):
         return reverse('listar_estoque')
@@ -40,12 +40,12 @@ class Create_estoque(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class Delete_estoque(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Estoque
     success_url = reverse_lazy('listar_estoque')
-    permission_required = ('estoque_Can__deletar')
+    permission_required = ('auth.delete_permission', 'estoque.can_deletar', 'estoque.estoque.can_deletar')
 
 class utilizou_licenca(View):
     def post(self, *args, **kwargs):
         registro = Estoque.objects.get(id=kwargs['pk'])
-        #json = serializers.serialize('json', registro)
+        # json = serializers.serialize('json', registro)
         response = json.dumps({'estoque_atual': str(registro)})
         return HttpResponse(response, content_type='application/json')
 
@@ -62,8 +62,8 @@ class ExportarExcel(View):
         row_num = 0
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
-        columns= ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel',
-                  'reservadas', 'estoque']
+        columns = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel',
+                   'reservadas', 'estoque']
 
         for col_num in range(len(columns)):
             ws.write(row_num, col_num, columns[col_num], font_style)

@@ -4,9 +4,10 @@
 
 {% block content %}
 {% bootstrap_messages %}
-
+<br>
 <div class="container container-fluid">
     <h2>Atualizar Licença</h2>
+<div class="card text-white bg-dark">
     <div class="containe container-fluid">
         <form method="post">{% csrf_token %}
             <div class="container">
@@ -32,6 +33,7 @@
             <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sair</a>
         </form>
 
+    </div>
     </div>
 </div>
 

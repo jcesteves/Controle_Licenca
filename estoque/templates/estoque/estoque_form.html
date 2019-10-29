@@ -3,8 +3,10 @@
 {% load static %}
 {% block content %}
 {% bootstrap_messages %}
+<br>
 <div class="container container-fluid">
-    <h2>Controle de Licença</h2>
+    <h2>Controle de Licença</h2><br>
+<div class="card text-white bg-dark">
     <div class="container container-fluid">
         <form method="post">{% csrf_token %}
             <div class="container">
@@ -25,6 +27,7 @@
             <input type="submit" value="Salvar" class="btn btn-success" onclick="utilizou_licenca({{object.id}})">
             <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sair</a>
         </form>
+    </div>
     </div>
 </div>
 {% endblock content %}
