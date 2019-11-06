@@ -12,7 +12,11 @@
     <title>Index</title>
     {% bootstrap_css %}
 </head>
-<body  style="background-image: url({% static 'bootstrap/images/background.png' %})">
+{% block bg_img %}
+<body style="background-image: url({% static 'bootstrap/images/background.jpg' %});
+       background-repeat: no-repeat; background-position: center; background-size: cover">
+{% endblock %}
+
 <header>
     <nav class="navbar navbar-dark bg-dark">
         <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px" class="img">
@@ -25,13 +29,14 @@
 
 <div class="container container-fluid">
     {% block content %}
-    <br>
-    <h2 align="center">Olá {{request.user.first_name}}, seja bem vindo ao sistema de controle de licença</h2>
-    <br>
-    <div class="" align="center">
-        <h6><p>Clique no botão abaixo para entrar no sistema de controle de licença</p></h6>
+    <br><br><br><br><br><br>
+    <h1 align="center" style="color: #020202; font-size:55px;">Olá {{request.user.first_name}}, seja bem vindo ao
+        sistema de controle de licença</h1><br>
+    <div class="text" align="center">
+        <h2 style="color:#ff0000;">Clique no botão abaixo para entrar no sistema</h2>
         <br>
-            <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sistema</a>
+        <a href="{% url 'listar_estoque' %}" class="btn btn-danger btn-lg" style="font-size:25px;">Controle de
+            Licença</a>
     </div>
     {% endblock %}
 
@@ -39,7 +44,7 @@
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
             <div>
-                <span>© 2018 Copyright - Desenvolvido por Analytics - Porto Seguro</span>
+                <span>© 2019 Copyright - Desenvolvido por Governança de TI - Porto Seguro</span>
             </div>
         </div>
         <!-- Copyright -->

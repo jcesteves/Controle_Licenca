@@ -19,7 +19,7 @@ class Estoque(models.Model):
     def total_estoque(self):
         self.estoque = self.quantidade_disponivel + self.reservadas
         Estoque.save(self)
-        return self.estoque or 0
+        return self.estoque
 
     def __str__(self):
         return str(self.produto) + str(self.fornecedor) + str(self.contrato) + \

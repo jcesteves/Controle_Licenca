@@ -10,30 +10,44 @@
     <title>Index</title>
     {% bootstrap_css %}
 </head>
-<body>
+<body style="background-image: url({% static 'bootstrap/images/background1.jpg' %});
+       background-repeat: no-repeat; background-position: center; background-size: cover">
+
 <nav class="navbar navbar-dark bg-dark">
     <img src="{% static 'bootstrap/images/logo.png' %}" alt="logo porto" height="45px">
     <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
 </nav>
-<div class="bg">
-<div class="container container-fluid"><br>
-    <h2>Login</h2>
-    <br>
-    <div class="login">
-    <form method="post" autocomplete="off">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-info">Login</button>
-    </form>
+
+<div class="cd card border-danger mb-3 bg-transparent " style="border-width: 3px;">
+    <div class="card-body">
+        <h2 id="login">Sistema de Controle de Licença</h2>
     </div>
 </div>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:50vh">
+        <div class="col-4">
+            <div class="card border-primary mb-3 bg-transparent" style="border-width: 2px;">
+                <div class="card-body">
+                    <form method="post" autocomplete="off">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {% bootstrap_form form %}
+                        </div>
+                        <button type="submit" id="sendlogin" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer class="footer page-footer">
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2018 Copyright - Desenvolvido por Analytics - Porto Seguro</div>
+    <div class="footer-copyright text-center py-3">
+        <div>
+            <span>© 2019 Copyright - Desenvolvido por Governança de TI - Porto Seguro</span>
+        </div>
+    </div>
     <!-- Copyright -->
 </footer>
-</div>
-{% bootstrap_javascript jquery='full' %}
-</body>
+
 </html>

@@ -1,4 +1,5 @@
 import json
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -8,6 +9,8 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Estoque
 import xlwt
+
+
 
 
 @login_required()
@@ -20,7 +23,6 @@ class List_estoque(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = ('estoque.view_estoque')
 
 
-
 class Edit_estoque(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Estoque
     fields = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas']
@@ -31,7 +33,7 @@ class Edit_estoque(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 class Create_estoque(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Estoque
     fields = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas']
-    permission_required = ('estoque.change_estoque', 'estoque.add_estoque','auth.view_permission')
+    permission_required = ('estoque.change_estoque', 'estoque.add_estoque', 'auth.view_permission')
 
     def get_success_url(self):
         return reverse('listar_estoque')
@@ -41,6 +43,7 @@ class Delete_estoque(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Estoque
     success_url = reverse_lazy('listar_estoque')
     permission_required = ('auth.delete_permission', 'estoque.can_deletar', 'estoque.estoque.can_deletar')
+
 
 class utilizou_licenca(View):
     def post(self, *args, **kwargs):

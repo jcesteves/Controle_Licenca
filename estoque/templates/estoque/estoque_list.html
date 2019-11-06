@@ -1,16 +1,18 @@
 {% extends 'estoque/index.html' %}
 {% load static %}
+{% block bg_img %}
+{% endblock %}
 {% block content %}
 <br>
 <div class="container">
-        <h2>Controle de Licença</h2>
-        <h5 id="user" style="float:left;">Usuário: {{request.user.first_name}}</h5>
-        <a href="{% url 'exportar_excel' %}" class="btn btn-warning" style="float:right; color: white;">Extrair Relatório</a>
-        <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;" >Cadastrar Licença</a><br>
+    <h2>Controle de Licença</h2>
+    <h5 id="user" style="float:left; color: white;">Usuário: {{request.user.first_name}}</h5>
+    <a href="{% url 'exportar_excel' %}" class="btn btn-warning" style="float:right; color: white;">Extrair
+        Relatório</a>
+    <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;">Cadastrar Licença</a><br>
 </div>
 <br>
 <div class="card text-white bg-dark">
-
     <div class="card-body">
 
         <div class="table">
@@ -29,11 +31,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% csrf_token %}
+                s {% csrf_token %}
                 {% for lista in object_list %}
                 <tr>
                     <th scope="row">{{lista.pk}}</th>
-                    <td ><a href="{% url 'editar_estoque' lista.pk %}">{{lista.produto}}</a></td>
+                    <td><a href="{% url 'editar_estoque' lista.pk %}">{{lista.produto}}</a></td>
                     <td>{{lista.fornecedor}}</td>
                     <td>{{lista.contrato}}</td>
                     <td>{{lista.aquisicoes}}</td>
@@ -53,3 +55,4 @@
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/func_ajax.js' %}"></script>
 {% endblock %}
+

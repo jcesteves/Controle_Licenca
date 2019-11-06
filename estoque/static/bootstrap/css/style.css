@@ -20,3 +20,20 @@
 .img{
     float:left;
 }
+
+
+.form-control{
+    color: black;
+}
+
+.cd{
+    padding: 5px;
+    margin: 35px;
+    position: center;
+    text-align: center;
+}
+
+#login{
+    font-size: 45px;
+    color: black;
+}

@@ -1,12 +1,13 @@
 {% extends 'estoque/index.html' %}
 {% load static %}
 {% load bootstrap4 %}
-
+{% block bg_img %}
+{% endblock %}
 {% block content %}
 {% bootstrap_messages %}
 <br>
 <div class="container container-fluid">
-    <h2>Atualizar Licença</h2>
+    <h2>Atualizar Licença</h2><br>
 <div class="card text-white bg-dark">
     <div class="containe container-fluid">
         <form method="post">{% csrf_token %}
@@ -29,6 +30,8 @@
             <input type="submit" value="Salvar" class="btn btn-success" onclick="utilizou_licenca({{object.id}})">
             {% if object %}
             <a href="{% url 'excluir_estoque' object.pk %}" class="btn btn-danger">Excluir</a>
+            {% else %}
+            <h3>Não existem itens a serem excluídos</h3>
             {% endif %}
             <a href="{% url 'listar_estoque' %}" class="btn btn-primary">Sair</a>
         </form>
