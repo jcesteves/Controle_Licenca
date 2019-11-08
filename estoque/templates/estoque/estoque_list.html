@@ -4,20 +4,18 @@
 {% endblock %}
 {% block content %}
 <br>
-<div class="container">
+<div class="container container-fluid">
     <h2>Controle de Licença</h2>
     <h5 id="user" style="float:left; color: white;">Usuário: {{request.user.first_name}}</h5>
     <a href="{% url 'exportar_excel' %}" class="btn btn-warning" style="float:right; color: white;">Extrair
         Relatório</a>
-    <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;">Cadastrar Licença</a><br>
+     <a href="{% url 'cadastrar_estoque' %}" class="btn btn-primary" style="float:right;">Cadastrar Licença</a><br>
 </div>
 <br>
-<div class="card text-white bg-dark">
+<div class="card text-white bg-light">
     <div class="card-body">
-
-        <div class="table">
-            <table class="table table-bordered table-responsive-md table-striped text-center"
-                   id="estoque_atual">
+       <div class="table table-responsive">
+            <table id="mytable" class="table table-bordered table-responsive-md table-striped text-center  row-border hover order-column">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
@@ -28,10 +26,11 @@
                     <th scope="col">Quantidade disponível</th>
                     <th scope="col">Reservadas</th>
                     <th scope="col">Estoque</th>
+                    <th scope="col">Data Cadastro</th>
                 </tr>
                 </thead>
                 <tbody>
-                s {% csrf_token %}
+                {% csrf_token %}
                 {% for lista in object_list %}
                 <tr>
                     <th scope="row">{{lista.pk}}</th>
@@ -41,11 +40,14 @@
                     <td>{{lista.aquisicoes}}</td>
                     <td>{{lista.quantidade_disponivel}}</td>
                     <td>{{lista.reservadas}}</td>
-                    <td>{{lista.total_estoque}}</td>
+                    <td id="estoque_atual">{{lista.total_estoque}}</td>
+                    <td>{{lista.data}}</td>
+
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
+        <br>
         </div>
     </div>
 </div>
@@ -54,5 +56,19 @@
 {% block static %}
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/func_ajax.js' %}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#mytable').DataTable();
+
+        $('#example tbody')
+            .on( 'mouseenter', 'td', function () {
+                var colIdx = table.cell(this).index().column;
+
+                $( table.cells().nodes() ).removeClass( 'highlight' );
+                $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+            } );
+    } );
+</script>
 {% endblock %}
 

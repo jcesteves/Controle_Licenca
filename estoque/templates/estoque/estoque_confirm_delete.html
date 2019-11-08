@@ -8,9 +8,9 @@
     <h1>Atualização de Licença</h1>
     <br>
     <br>
-    <div class="card-body">
+    <div class="card-body jumbotron">
         <form method="post">{% csrf_token %}
-            <h4>{{request.user.first_name}}, você tem certeza de que deseja excluir a licença abaixo?<br><br><p><strong
+            <h4>{{request.user}}, você tem certeza de que deseja excluir a licença abaixo?<br><br><p><strong
                     style="color:red;">{{object}}</strong></p></h4>
             <br><a href="{% url 'listar_estoque' %}" class="btn btn-success btn-lg" style="float:right">Sair</a>
             <input type="submit" value="Excluir" class="btn btn-danger btn-lg" style="float:left">

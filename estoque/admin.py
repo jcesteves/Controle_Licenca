@@ -8,7 +8,11 @@ admin.site.index_title = ''
 
 @admin.register(Estoque)
 class EstoqueAdmin(admin.ModelAdmin):
-    list_display = ('produto', 'aquisicoes', 'quantidade_disponivel', 'reservadas', 'estoque')
+    fields = ('produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas', 'estoque', 'data')
+    list_display = ('produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas', 'estoque', 'data')
+    search_fields = ('produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas', 'estoque', 'data')
+    list_filter = ('produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel', 'reservadas', 'estoque', 'data')
+    readonly_fields = ('data',)
     
 
 

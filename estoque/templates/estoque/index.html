@@ -8,6 +8,8 @@
     <meta http-equiv="refresh" content="60">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css">
+
 
     <title>Index</title>
     {% bootstrap_css %}
@@ -30,7 +32,7 @@
 <div class="container container-fluid">
     {% block content %}
     <br><br><br><br><br><br>
-    <h1 align="center" style="color: #020202; font-size:55px;">Olá {{request.user.first_name}}, seja bem vindo ao
+    <h1 align="center" style="color: #020202; font-size:55px;">Olá {{request.user}}, seja bem vindo ao
         sistema de controle de licença</h1><br>
     <div class="text" align="center">
         <h2 style="color:#ff0000;">Clique no botão abaixo para entrar no sistema</h2>

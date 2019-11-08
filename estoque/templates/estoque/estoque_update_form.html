@@ -26,8 +26,8 @@
                     </div>
                 </div>
             </div>
-
             <input type="submit" value="Salvar" class="btn btn-success" onclick="utilizou_licenca({{object.id}})">
+
             {% if object %}
             <a href="{% url 'excluir_estoque' object.pk %}" class="btn btn-danger">Excluir</a>
             {% else %}

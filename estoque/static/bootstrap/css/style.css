@@ -37,3 +37,7 @@
     font-size: 45px;
     color: black;
 }
+
+td.highlight {
+    background-color: whitesmoke !important;
+}

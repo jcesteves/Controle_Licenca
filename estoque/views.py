@@ -1,5 +1,4 @@
 import json
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -9,7 +8,6 @@ from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Estoque
 import xlwt
-
 
 
 
@@ -48,9 +46,9 @@ class Delete_estoque(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 class utilizou_licenca(View):
     def post(self, *args, **kwargs):
         registro = Estoque.objects.get(id=kwargs['pk'])
-        # json = serializers.serialize('json', registro)
         response = json.dumps({'estoque_atual': str(registro)})
         return HttpResponse(response, content_type='application/json')
+
 
 
 #### View da extração do relatorio #####
@@ -65,8 +63,8 @@ class ExportarExcel(View):
         row_num = 0
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
-        columns = ['produto', 'fornecedor', 'contrato', 'aquisicoes', 'quantidade_disponivel',
-                   'reservadas', 'estoque']
+        columns = ['Produto', 'Fornecedor', 'Contrato', 'Aquisições', 'Quantidade_Disponivel',
+                   'Reservadas', 'Estoque', 'Data']
 
         for col_num in range(len(columns)):
             ws.write(row_num, col_num, columns[col_num], font_style)
@@ -82,6 +80,7 @@ class ExportarExcel(View):
             ws.write(row_num, 4, registro.quantidade_disponivel, font_style)
             ws.write(row_num, 5, registro.reservadas, font_style)
             ws.write(row_num, 6, registro.estoque, font_style)
+            ws.write(row_num, 7, registro.dt, font_style)
             row_num += 1
         wb.save(response)
         return response

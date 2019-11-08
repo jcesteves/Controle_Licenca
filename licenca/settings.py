@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'estoque',
     'bootstrap4',
+
+
 ]
 
 MIDDLEWARE = [
